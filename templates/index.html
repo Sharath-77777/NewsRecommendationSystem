@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Recommendation System</title>
+</head>
+<body>
+    <h1>News Recommendation System</h1>
+
+    {% if average_rmse is not none and not show_recommendations %}
+        <h2>Average RMSE: {{ average_rmse }}</h2>
+    {% endif %}
+
+    <form method="post" action="/recommendations">
+        <label for="user_id">Enter User ID:</label>
+        <input type="text" id="user_id" name="user_id" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if user_id is not none %}
+        <h2>Top 5 News ID Recommendations for User {{ user_id }}:</h2>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
